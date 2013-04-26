@@ -6,7 +6,7 @@ namespace Bolo.DirectoryNav.Handlers
 {
     public class DirectoryNavPardHandler : ContentHandler
     {
-        public DirectoryNavPardHandler(IRepository<LinkRecord> repository)
+        public DirectoryNavPardHandler(IRepository<TitlePardRecord> repository)
         {
             Filters.Add(StorageFilter.For(repository));
         }

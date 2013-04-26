@@ -2,6 +2,7 @@
 using Bolo.DirectoryNav.Models;
 using Bolo.DirectoryNav.ViewModels;
 using Orchard.Localization;
+using Orchard.ContentManagement;
 
 namespace Bolo.DirectoryNav.Drivers
 {
@@ -27,5 +28,20 @@ namespace Bolo.DirectoryNav.Drivers
                     Prefix:Prefix
                     ));
         }
+
+                //GET
+        //protected override DriverResult Editor(DirectoryNavPard part, dynamic shapeHelper) {
+        //    return ContentShape("Parts_ImageGallery_Edit",
+        //                        () => shapeHelper.EditorTemplate(
+        //                            TemplateName: "Parts/ImageGallery",
+        //                            Model: part,
+        //                            Prefix: Prefix));
+        //}
+
+        ////POST
+        //protected override DriverResult Editor(DirectoryNavPard part, IUpdateModel updater, dynamic shapeHelper) {
+        //    updater.TryUpdateModel(part, Prefix, null, null);
+        //    return Editor(part, shapeHelper);
+        //}
     }
 }
