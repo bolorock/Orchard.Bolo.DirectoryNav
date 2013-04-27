@@ -7,7 +7,7 @@ namespace Bolo.DirectoryNav
     {
         public int Create()
         {
-            SchemaBuilder.CreateTable("LinkPartRecord",
+            SchemaBuilder.CreateTable("LinkRecord",
                 table => table
                     .ContentPartRecord()
                     .Column<int>("TitleRecord_Id")
@@ -31,5 +31,6 @@ namespace Bolo.DirectoryNav
 
             return 1;
         }
+
     }
 }

@@ -6,7 +6,7 @@ using Orchard.ContentManagement;
 
 namespace Bolo.DirectoryNav.Models
 {
-    public class DirectoryNavPard : ContentPart<TitlePardRecord>
+    public class DirectoryNavPard : ContentPart<TitleRecord>
     {
         public string Name
         {
@@ -16,8 +16,8 @@ namespace Bolo.DirectoryNav.Models
 
         public IList<LinkRecord> Linkrecords
         {
-            get { return Record.LinkPardRecords; }
-            set { Record.LinkPardRecords = value; }
+            get { return Record.LinkRecords; }
+            set { Record.LinkRecords = value; }
         }
     }
 }

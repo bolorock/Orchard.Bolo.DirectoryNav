@@ -1,0 +1,66 @@
+﻿@model Bolo.DirectoryNav.ViewModels.LinkViewModel
+
+
+@{ Layout.Title = T("Manage Link").ToString(); }
+
+<div class="clearBoth"></div>
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="manage">
+        @Html.ActionLink(T("Add links").ToString(), "AddLinks", new {titleId=Model.TitleId, titleName = Model.TitleName }, new { @class = "button primaryAction" })
+        @Html.ActionLink(T("Link Properties").ToString(), "EditProperties", new {titleId=Model.TitleId, titleName = Model.TitleName }, new { @class = "button" })
+    </div>
+    
+    <h2>@Model.TitleName</h2>
+    
+        <input type="hidden" id="titleName" name="titleName" value="@Model.TitleId" />
+    
+    <fieldset>
+        <table id="links" class="items" summary="@T("This is a table of the links of your title.")">
+            <thead>
+                <tr>
+                    <th>
+                        &nbsp;↓
+                    </th>
+                    <th>
+                        @T("Name")
+                    </th>
+                    <th>
+                        @T("Url")                        
+                    </th>
+                    <th>
+                        @T("LastUpdated")  
+                    </th>
+                    <th>
+                        @T("Is Show")  
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var link in Model.Links)
+                {
+                <tr>
+                    <td class="sort">                        
+                        <img src='@Href("~/Modules/Mello.ImageGallery/Content/Images/grip.png")'  alt="grip" />
+                    </td>
+                    <td class="name">                        
+                        @Html.ActionLink(@link.Name, "EditLink", new { titleName = @Model.TitleName,linkId=@link.Id,linkName = @link.Name }) 
+                    </td>
+                    <td>
+                        @link.Url
+                    </td>
+                    <td>
+                        @link.LastUpdated
+                    </td>
+                    <td>
+                        @link.IsShow
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </fieldset>
+    
+    @Html.ActionLink("Back", "Index", null, new { Class = "button" })
+}

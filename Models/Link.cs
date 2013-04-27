@@ -7,6 +7,7 @@ namespace Bolo.DirectoryNav.Models
 {
     public class Link
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
         public bool IsShow { get; set; }

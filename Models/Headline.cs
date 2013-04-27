@@ -12,7 +12,7 @@ namespace Bolo.DirectoryNav.Models
             links = new List<Link>();
         }
 
-        public int Id { get; set; }
+        public int TitleId { get; set; }
         public string Name { get; set; }
         public string linkNum { get; set; }
         public DateTime LastUpdated { get; set; }

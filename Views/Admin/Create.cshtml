@@ -1,0 +1,15 @@
+﻿@model Bolo.DirectoryNav.ViewModels.CreateTitleViewModel
+
+@{ Layout.Title = T("Create New Title").ToString(); }
+
+@using (Html.BeginFormAntiForgeryPost()){
+    @Html.ValidationSummary()
+    <fieldset>
+        <label for="TitleName">@T("Title Name")</label>
+        <input type="text" name="TitleName" class="textMedium" />
+    </fieldset>
+    <fieldset >
+        <button class="primaryAction" type="submit">@T("Save")</button>
+        @Html.ActionLink("Back", "Index", null, new { Class = "button"})
+    </fieldset>
+}
