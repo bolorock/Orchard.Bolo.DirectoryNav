@@ -21,7 +21,7 @@ namespace Bolo.DirectoryNav.Services
         LinkRecord GetLink(int linkId);
         void AddLink(int titleId, string linkName, string url);
         void EditLink(LinkRecord record);
-        void DeleteLink(string titleName, string linkName);
+        void DeleteLink(int linkId);
 
         //string GetPublicUrl(string path);
        // bool IsFileAllowed(HttpPostedFileBase file);

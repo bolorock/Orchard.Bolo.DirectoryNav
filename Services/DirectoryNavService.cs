@@ -97,9 +97,13 @@ namespace Bolo.DirectoryNav.Services
             _linkRepository.Update(record);
         }
 
-        public void DeleteLink(string titleName, string linkName)
+        public void DeleteLink(int linkId)
         {
-            throw new NotImplementedException();
+            var linkRecord=_linkRepository.Get(o=>o.Id==linkId);
+            if (linkRecord != null)
+            {
+                _linkRepository.Delete(linkRecord);
+            }
         }
 
         public void ReorderLinks(string titleName, IEnumerable<string> links)

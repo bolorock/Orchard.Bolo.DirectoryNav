@@ -20,6 +20,7 @@
     </fieldset>
     <fieldset >
         <button class="primaryAction" type="submit">@T("Save")</button>
+        <button type="submit" name="submit.DeleteLink" value="@T("Delete")">@T("Delete")</button>
         @Html.ActionLink("Back", "Links", new { titleId = Model.TitleId }, new {Class = "button" })
     </fieldset>
 }

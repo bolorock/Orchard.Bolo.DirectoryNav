@@ -140,6 +140,7 @@ namespace Bolo.DirectoryNav.Controllers
         }
 
         [HttpPost]
+        [FormValueRequired("submit.Save")]
         public ActionResult EditLink(LinkEditViewModel viewModel)
         {
             if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Cannot edit link")))
@@ -159,6 +160,30 @@ namespace Bolo.DirectoryNav.Controllers
             }
 
             return RedirectToAction("Links", new { titleId = viewModel.TitleId, TitleName = viewModel.TitleName });
+        }
+
+        [HttpPost]
+        [FormValueRequired("submit.DeleteLink")]
+        [ActionName("EditLink")]
+        public ActionResult DeleteLink(int linkId,int titleId)
+        {
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Cannot delete link")))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            try
+            {
+                _directoryNavService.DeleteLink(linkId);
+
+                _orchardServices.Notifier.Information(T("link successfully deleted"));
+            }
+            catch (Exception exception)
+            {
+                _orchardServices.Notifier.Error(T("Deleting link failed: {0}", exception.Message));
+            }
+
+            return RedirectToAction("Links", new { titleId });
         }
 
     }
