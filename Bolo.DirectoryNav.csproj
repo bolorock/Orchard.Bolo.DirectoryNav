@@ -72,6 +72,7 @@
     <Content Include="Styles\Web.config" />
     <Content Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
+    <Content Include="Views\Admin\EditLink.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -101,6 +102,7 @@
     <Compile Include="ViewModels\DirectoryNavIndexViewModel.cs" />
     <Compile Include="ViewModels\DirectoryNavViewModel.cs" />
     <Compile Include="ViewModels\LinkAddViewModel.cs" />
+    <Compile Include="ViewModels\LinkEditViewModel.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,7 +115,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\CreateTitle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Links.cshtml" />

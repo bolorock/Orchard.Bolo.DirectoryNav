@@ -9,7 +9,7 @@
 {
     <div class="manage">
         @Html.ActionLink(T("Add links").ToString(), "AddLinks", new {titleId=Model.TitleId, titleName = Model.TitleName }, new { @class = "button primaryAction" })
-        @Html.ActionLink(T("Link Properties").ToString(), "EditProperties", new {titleId=Model.TitleId, titleName = Model.TitleName }, new { @class = "button" })
+        @Html.ActionLink(T("Title Properties").ToString(), "EditProperties", new {titleId=Model.TitleId, titleName = Model.TitleName }, new { @class = "button" })
     </div>
     
     <h2>@Model.TitleName</h2>
@@ -45,7 +45,7 @@
                         <img src='@Href("~/Modules/Mello.ImageGallery/Content/Images/grip.png")'  alt="grip" />
                     </td>
                     <td class="name">                        
-                        @Html.ActionLink(@link.Name, "EditLink", new { titleName = @Model.TitleName,linkId=@link.Id,linkName = @link.Name }) 
+                        @Html.ActionLink(@link.Name, "EditLink", new { titleId = Model.TitleId, linkId = link.Id, linkName = link.Name, url = link.Url })
                     </td>
                     <td>
                         @link.Url

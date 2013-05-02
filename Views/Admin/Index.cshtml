@@ -2,7 +2,7 @@
            
 @{ Layout.Title = T("Directory navigation").ToString(); }
 
-<div class="manage">@Html.ActionLink(T("Add new Title").ToString(), "Create", new { }, new { @class = "button primaryAction" })</div>
+<div class="manage">@Html.ActionLink(T("Add new Title").ToString(), "CreateTitle", new { }, new { @class = "button primaryAction" })</div>
 
 <fieldset>
     <table class="items" summary="@T("This is a table of the Directory navigation currently available for use in your application.")">

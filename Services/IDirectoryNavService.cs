@@ -18,9 +18,9 @@ namespace Bolo.DirectoryNav.Services
         void RenameTitle(string titleName, string newName);
         //void UpdateImageGalleryProperties(string name, int thumbnailHeight, int thumbnailWidth, bool keepAspectRatio);
 
-        Models.Link GetLink(string titleName, string linkName);
-        void AddLInk(int titleId,string linkName, string url);
-        //void UpdateImageProperties(string imageGalleryName, string imageName, string imageTitle, string imageCaption);
+        LinkRecord GetLink(int linkId);
+        void AddLink(int titleId, string linkName, string url);
+        void EditLink(LinkRecord record);
         void DeleteLink(string titleName, string linkName);
 
         //string GetPublicUrl(string path);

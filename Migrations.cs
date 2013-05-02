@@ -9,7 +9,7 @@ namespace Bolo.DirectoryNav
         {
             SchemaBuilder.CreateTable("LinkRecord",
                 table => table
-                    .ContentPartRecord()
+                    .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<int>("TitleRecord_Id")
                     .Column<string>("Name",column=>column.WithLength(20))
                     .Column<string>("Url")

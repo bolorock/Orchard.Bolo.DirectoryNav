@@ -1,0 +1,26 @@
+﻿@model Bolo.DirectoryNav.ViewModels.LinkEditViewModel
+
+@{ Layout.Title = T("Edit Link - {0}", Model.LinkName).ToString(); }
+
+@using (Html.BeginFormAntiForgeryPost()){
+    @Html.ValidationSummary()
+
+    <input type="hidden" id="LinkId" name="LinkId" value="@Model.LinkId" />
+    <input type="hidden" id="TitleId" name="TitleId" value="@Model.TitleId" />
+    
+    <fieldset>
+        @Html.HiddenFor(o => o.LinkId)
+        @Html.HiddenFor(o=>o.TitleId)
+
+        <label for="Name">@T("Link Name")</label>
+        @Html.TextBox("LinkName", Model.LinkName)
+
+        <label for="Url">@T("Url")</label>
+        @Html.TextBoxFor(o=>o.Url)
+    </fieldset>
+    <fieldset >
+        <button class="primaryAction" type="submit">@T("Save")</button>
+        @Html.ActionLink("Back", "Links", new { titleId = Model.TitleId }, new {Class = "button" })
+    </fieldset>
+}
+

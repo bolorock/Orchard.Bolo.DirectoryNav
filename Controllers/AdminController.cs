@@ -4,8 +4,10 @@ using Orchard;
 using Orchard.Localization;
 using Orchard.UI.Notify;
 
+using Bolo.DirectoryNav.Models;
 using Bolo.DirectoryNav.ViewModels;
 using Bolo.DirectoryNav.Services;
+using Orchard.Core.Contents.Controllers;
 
 
 namespace Bolo.DirectoryNav.Controllers
@@ -32,7 +34,7 @@ namespace Bolo.DirectoryNav.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult CreateTitle()
         {
             if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Couldn't create DirectoryNav Title")))
             {
@@ -43,7 +45,7 @@ namespace Bolo.DirectoryNav.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreateTitleViewModel addTitleViewModel)
+        public ActionResult CreateTitle(CreateTitleViewModel addTitleViewModel)
         {
             if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Couldn't create DirectoryNav Title")))
             {
@@ -110,10 +112,10 @@ namespace Bolo.DirectoryNav.Controllers
 
             try
             {
-                _directoryNavService.AddLInk(viewModel.TitleId, viewModel.LinkName, viewModel.Url);
+                _directoryNavService.AddLink(viewModel.TitleId, viewModel.LinkName, viewModel.Url);
 
-                _orchardServices.Notifier.Information(T("Title created"));
-                return RedirectToAction("Index");
+                _orchardServices.Notifier.Information(T("Link successfully created"));
+                return RedirectToAction("Links", new { titleId = viewModel.TitleId });
 
             }
             catch (Exception exception)
@@ -122,7 +124,42 @@ namespace Bolo.DirectoryNav.Controllers
                 return View(viewModel);
             }
 
-            return RedirectToAction("Links", new { titleId=viewModel.TitleId, TitleName= viewModel.TitleName });
+            return RedirectToAction("Links", new { titleId = viewModel.TitleId, TitleName = viewModel.TitleName });
         }
+
+        [HttpGet]
+        public ActionResult EditLink(int titleId,int linkId,string linkName,string url)
+        {
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Cannot edit link")))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            return
+                View(new LinkEditViewModel { TitleId = titleId, LinkId = linkId, LinkName = linkName, Url = url });
+        }
+
+        [HttpPost]
+        public ActionResult EditLink(LinkEditViewModel viewModel)
+        {
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Cannot edit link")))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            try
+            {
+                _directoryNavService.EditLink(new LinkRecord { Id = viewModel.LinkId, Name = viewModel.LinkName, Url = viewModel.Url });
+                _orchardServices.Notifier.Information(T("Link successfully modified"));
+                return RedirectToAction("Links", new { titleId = viewModel.TitleId, titleName = viewModel.TitleName });
+            }
+            catch (Exception exception)
+            {
+                _orchardServices.Notifier.Error(T("Saving link failed: {0}", exception.Message));
+            }
+
+            return RedirectToAction("Links", new { titleId = viewModel.TitleId, TitleName = viewModel.TitleName });
+        }
+
     }
 }

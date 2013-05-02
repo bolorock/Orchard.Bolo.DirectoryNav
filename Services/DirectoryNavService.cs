@@ -45,6 +45,7 @@ namespace Bolo.DirectoryNav.Services
             {
                 links = titleRecord.LinkRecords == null ? null : titleRecord.LinkRecords.Select(o => new Link
                 {
+                    Id=o.Id,
                     Name = o.Name,
                     Url = o.Url,
                     IsShow = o.IsShow
@@ -73,19 +74,27 @@ namespace Bolo.DirectoryNav.Services
             throw new NotImplementedException();
         }
 
-        public Models.Link GetLink(string titleName, string linkName)
+        public LinkRecord GetLink(int linkId)
         {
-            throw new NotImplementedException();
+            return _linkRepository.Get(o => o.Id == linkId);
         }
 
-        public void AddLInk(int titleId, string linkName, string url)
+        public void AddLink(int titleId, string linkName, string url)
         {
+            var titleRecord = _titleRepository.Get(o => o.Id == titleId);
             LinkRecord record = new LinkRecord
             {
                 Name = linkName,
                 Url = url
             };
+            titleRecord.LinkRecords.Add(record);
             _linkRepository.Create(record);
+            _titleRepository.Update(titleRecord);
+        }
+
+        public void EditLink(LinkRecord record)
+        {
+            _linkRepository.Update(record);
         }
 
         public void DeleteLink(string titleName, string linkName)
