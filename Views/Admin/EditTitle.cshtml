@@ -1,0 +1,18 @@
+﻿@model Bolo.DirectoryNav.ViewModels.TitleEditViewModel
+
+@{ Layout.Title = T("Edit Title - {0}", Model.TitleName).ToString(); }
+
+@using (Html.BeginFormAntiForgeryPost()){
+    @Html.ValidationSummary()
+    
+    <fieldset>
+        @Html.HiddenFor(o=>o.TitleId)
+
+        <label for="Name">@T("Title Name")</label>
+        @Html.TextBox("TitleName", Model.TitleName)
+    </fieldset>
+    <fieldset >
+        <button class="primaryAction" type="submit">@T("Save")</button>   
+        @Html.ActionLink("Back", "Index", null, new {Class = "button" })
+    </fieldset>
+}

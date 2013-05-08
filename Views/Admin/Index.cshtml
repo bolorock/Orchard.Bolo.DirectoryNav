@@ -1,28 +1,35 @@
 ﻿@model Bolo.DirectoryNav.ViewModels.DirectoryNavIndexViewModel 
-           
 @{ Layout.Title = T("Directory navigation").ToString(); }
 
 <div class="manage">@Html.ActionLink(T("Add new Title").ToString(), "CreateTitle", new { }, new { @class = "button primaryAction" })</div>
-
-<fieldset>
-    <table class="items" summary="@T("This is a table of the Directory navigation currently available for use in your application.")">
-        <thead>
-            <tr>
-                <th>@T("Name")</th>
-                <th>@T("Link Num")</th>
-            </tr>
-        </thead>                                                                                                                                                                                                                                                                                                                                                                                                 
-        <tbody>
-            @foreach (var headline in Model.Headlines) {
+@using (Html.BeginFormAntiForgeryPost())
+{ 
+    <fieldset>
+        <table class="items" summary="@T("This is a table of the Directory navigation currently available for use in your application.")">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.ActionLink(headline.Name, "Links", new { titleId = headline.TitleId })                        
-                    </td>
-                    <td>
-                        @headline.links.Count()
-                    </td>
+                    <th>@T("Name")</th>
+                    <th>@T("Link Num")</th>
+                    <th scope="col">@T("Actions")</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</fieldset>
+            </thead>
+            <tbody>
+                @foreach (var headline in Model.Headlines)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(headline.Name, "Links", new { titleId = headline.TitleId })
+                        </td>
+                        <td>
+                            @headline.linkNum
+                        </td>
+                        <td>
+                            @Html.ActionLink(T("Edit").ToString(), "EditTitle", new { titleId=headline.TitleId,titleName=headline.Name }) |
+                            @Html.ActionLink(T("Delete").ToString(), "DeleteTitle", new { titleId = headline.TitleId }, new { itemprop = "RemoveUrl UnsafeUrl" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </fieldset>
+}

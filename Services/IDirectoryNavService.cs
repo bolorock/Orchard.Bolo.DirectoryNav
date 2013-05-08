@@ -7,6 +7,7 @@ namespace Bolo.DirectoryNav.Services
 {
     public interface IDirectoryNavService : IDependency
     {
+        IEnumerable<TitleRecord> GetTitles();
         IEnumerable<Headline> GetHeadlines();
 
         IEnumerable<string> AllowedFileFormats { get; }
@@ -14,8 +15,8 @@ namespace Bolo.DirectoryNav.Services
         Models.Headline GetHeadline(int titleId);
 
         void CreateTitle(string titleName);
-        void DeleteTitle(string titleName);
-        void RenameTitle(string titleName, string newName);
+        void DeleteTitle(int titleId);
+        void EditTitle(TitleRecord record);
         //void UpdateImageGalleryProperties(string name, int thumbnailHeight, int thumbnailWidth, bool keepAspectRatio);
 
         LinkRecord GetLink(int linkId);
@@ -24,7 +25,7 @@ namespace Bolo.DirectoryNav.Services
         void DeleteLink(int linkId);
 
         //string GetPublicUrl(string path);
-       // bool IsFileAllowed(HttpPostedFileBase file);
+        // bool IsFileAllowed(HttpPostedFileBase file);
 
         void ReorderLinks(string titleName, IEnumerable<string> links);
     }

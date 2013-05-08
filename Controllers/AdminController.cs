@@ -28,7 +28,7 @@ namespace Bolo.DirectoryNav.Controllers
         }
 
         [HttpGet]
-        public ViewResult index()
+        public ViewResult Index()
         {
             return View(new DirectoryNavIndexViewModel { Headlines = _directoryNavService.GetHeadlines() });
         }
@@ -41,11 +41,11 @@ namespace Bolo.DirectoryNav.Controllers
                 return new HttpUnauthorizedResult();
             }
 
-            return View(new CreateTitleViewModel());
+            return View(new TitleAddViewModel());
         }
 
         [HttpPost]
-        public ActionResult CreateTitle(CreateTitleViewModel addTitleViewModel)
+        public ActionResult CreateTitle(TitleAddViewModel addTitleViewModel)
         {
             if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Couldn't create DirectoryNav Title")))
             {
@@ -69,6 +69,63 @@ namespace Bolo.DirectoryNav.Controllers
                 return View(addTitleViewModel);
             }
         }
+
+        [HttpPost]
+        public ActionResult DeleteTitle(int titleId)
+        {
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Cannot delete title")))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            try
+            {
+                _directoryNavService.DeleteTitle(titleId);
+
+                _orchardServices.Notifier.Information(T("title successfully deleted"));
+            }
+            catch (Exception exception)
+            {
+                _orchardServices.Notifier.Error(T("Deleting title failed: {0}", exception.Message));
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult EditTitle(int titleId, string titleName)
+        {
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Cannot edit link")))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            return
+                View(new TitleEditViewModel { TitleId = titleId,TitleName=titleName });
+        }
+
+        [HttpPost]
+        public ActionResult EditTitle(TitleEditViewModel viewModel)
+        {
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ManageDirectoryNav, T("Cannot edit link")))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            try
+            {
+                _directoryNavService.EditTitle(new  TitleRecord{Id=viewModel.TitleId,Name=viewModel.TitleName});
+                _orchardServices.Notifier.Information(T("Title successfully modified"));
+                return RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                _orchardServices.Notifier.Error(T("Saving title failed: {0}", exception.Message));
+            }
+
+            return RedirectToAction("Index");
+        }
+
 
         [HttpGet]
         public ActionResult Links(int titleId)

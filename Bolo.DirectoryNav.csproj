@@ -65,7 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\grip.png" />
+    <Content Include="Placement.info" />
     <None Include="Views\Admin\AddLinks.cshtml" />
+    <None Include="Views\Admin\EditTitle.cshtml" />
+    <Content Include="Styles\bolo-directoryNav.css" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\Web.config" />
@@ -96,14 +99,16 @@
     <Compile Include="Models\LinkRecord.cs" />
     <Compile Include="Models\TitleRecord.cs" />
     <Compile Include="Permissions.cs" />
+    <Compile Include="ResourceManifest.cs" />
     <Compile Include="Services\DirectoryNavService.cs" />
     <Compile Include="Services\IDirectoryNavService.cs" />
-    <Compile Include="ViewModels\CreateTitleViewModel.cs" />
+    <Compile Include="ViewModels\TitleAddViewModel.cs" />
     <Compile Include="ViewModels\DirectoryNavIndexViewModel.cs" />
     <Compile Include="ViewModels\DirectoryNavViewModel.cs" />
     <Compile Include="ViewModels\LinkAddViewModel.cs" />
     <Compile Include="ViewModels\LinkEditViewModel.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
+    <Compile Include="ViewModels\TitleEditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\EditorTemplates\" />

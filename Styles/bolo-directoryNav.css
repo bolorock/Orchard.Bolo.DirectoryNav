@@ -1,0 +1,32 @@
+﻿.bound
+{
+    width: 980px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.section
+{
+    float: left;
+    margin-right: 89px;
+    min-width: 100px;
+    position: relative;
+    padding: 32px 0px 0px 0px;
+}
+
+.information
+{
+    width: 120px;
+    margin-right: 70px;
+    text-align: left;
+    margin-left: 7px;
+}
+
+span.title
+{
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+}

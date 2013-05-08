@@ -9,17 +9,17 @@ namespace Bolo.DirectoryNav.Models
     {
         public Headline()
         {
-            links = new List<Link>();
+            links = new List<LinkRecord>();
         }
 
         public int TitleId { get; set; }
         public string Name { get; set; }
-        public string linkNum { get; set; }
+        public int linkNum { get; set; }
         public DateTime LastUpdated { get; set; }
 
         public int row { get; set; }
         public int column { get; set; }
 
-        public IEnumerable<Link> links { get; set; }
+        public IEnumerable<LinkRecord> links { get; set; }
     }
 }

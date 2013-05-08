@@ -5,7 +5,7 @@ namespace Bolo.DirectoryNav.ViewModels
 {
     public class LinkViewModel
     {
-        public IEnumerable<Link> Links { get; set; }
+        public IEnumerable<LinkRecord> Links { get; set; }
 
         public string TitleName { get; set; }
 

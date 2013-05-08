@@ -20,6 +20,11 @@ namespace Bolo.DirectoryNav.Services
             _linkRepository = linkRepository;
         }
 
+        public IEnumerable<TitleRecord> GetTitles()
+        {
+            return _titleRepository.Table;
+        }
+
 
         public IEnumerable<Headline> GetHeadlines()
         {
@@ -28,7 +33,8 @@ namespace Bolo.DirectoryNav.Services
             var query = titles.Select(o => new Headline
              {
                  TitleId = o.Id,
-                 Name = o.Name
+                 Name = o.Name,
+                 linkNum=o.LinkRecords.Count()
              });
             return query;
         }
@@ -43,9 +49,9 @@ namespace Bolo.DirectoryNav.Services
             var titleRecord = _titleRepository.Get(o => o.Id == titleId);
             return new Headline
             {
-                links = titleRecord.LinkRecords == null ? null : titleRecord.LinkRecords.Select(o => new Link
+                links = titleRecord.LinkRecords == null ? null : titleRecord.LinkRecords.Select(o => new LinkRecord
                 {
-                    Id=o.Id,
+                    Id = o.Id,
                     Name = o.Name,
                     Url = o.Url,
                     IsShow = o.IsShow
@@ -64,14 +70,18 @@ namespace Bolo.DirectoryNav.Services
             _titleRepository.Create(record);
         }
 
-        public void DeleteTitle(string titleName)
+        public void DeleteTitle(int titleId)
         {
-            throw new NotImplementedException();
+            var entity = _titleRepository.Get(o => o.Id == titleId);
+            if (entity != null)
+            {
+                _titleRepository.Delete(entity);
+            }
         }
 
-        public void RenameTitle(string titleName, string newName)
+        public void EditTitle(TitleRecord record)
         {
-            throw new NotImplementedException();
+            _titleRepository.Update(record);
         }
 
         public LinkRecord GetLink(int linkId)
@@ -99,7 +109,7 @@ namespace Bolo.DirectoryNav.Services
 
         public void DeleteLink(int linkId)
         {
-            var linkRecord=_linkRepository.Get(o=>o.Id==linkId);
+            var linkRecord = _linkRepository.Get(o => o.Id == linkId);
             if (linkRecord != null)
             {
                 _linkRepository.Delete(linkRecord);

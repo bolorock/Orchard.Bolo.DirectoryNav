@@ -2,7 +2,7 @@
 
 namespace Bolo.DirectoryNav.ViewModels
 {
-    public class CreateTitleViewModel
+    public class TitleAddViewModel
     {
         [Required]
         public string TitleName { get; set; }
